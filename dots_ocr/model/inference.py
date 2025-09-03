@@ -18,10 +18,11 @@ async def async_inference_with_vllm(
         top_p=0.9,
         max_completion_tokens=32768,
         model_name='model',
+        client = None,
         ):
-    
-    addr = f"http://{ip}:{port}/v1"
-    client = AsyncOpenAI(api_key="{}".format(os.environ.get("API_KEY", "0")), base_url=addr)
+    if client is None:
+        addr = f"http://{ip}:{port}/v1"
+        client = AsyncOpenAI(api_key="{}".format(os.environ.get("API_KEY", "0")), base_url=addr)
     messages = []
     messages.append(
         {

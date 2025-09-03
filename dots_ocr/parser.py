@@ -32,6 +32,7 @@ class DotsOCRParser:
             min_pixels=None,
             max_pixels=None,
             use_hf=False,
+            client=None,
         ):
         self.dpi = dpi
 
@@ -56,6 +57,8 @@ class DotsOCRParser:
             print(f"use vllm model, num_thread will be set to {self.num_thread}")
         assert self.min_pixels is None or self.min_pixels >= MIN_PIXELS
         assert self.max_pixels is None or self.max_pixels <= MAX_PIXELS
+
+        self.client = client
 
     def _load_hf_model(self):
         import torch
@@ -124,6 +127,7 @@ class DotsOCRParser:
             temperature=self.temperature,
             top_p=self.top_p,
             max_completion_tokens=self.max_completion_tokens,
+            client=self.client,
         )
         return response
 
