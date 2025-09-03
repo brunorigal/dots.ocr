@@ -1,7 +1,6 @@
 from PIL import Image
 from typing import Dict, List
 
-import fitz
 from io import BytesIO
 import json
 
@@ -43,6 +42,7 @@ def draw_layout_on_image(image, cells, resized_height=None, resized_width=None, 
     Returns:
         PIL.Image: The image with drawings.
     """
+    import fitz
     # origin_image = Image.open(image_path)
     original_width, original_height = image.size
         

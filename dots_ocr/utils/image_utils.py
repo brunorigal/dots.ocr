@@ -6,7 +6,7 @@ import os
 from dots_ocr.utils.consts import IMAGE_FACTOR, MIN_PIXELS, MAX_PIXELS
 from dots_ocr.utils.doc_utils import fitz_doc_to_image
 from io import BytesIO
-import fitz
+
 import requests
 import copy
 
@@ -169,6 +169,7 @@ def get_input_dimensions(
 
 def get_image_by_fitz_doc(image, target_dpi=200):
     # get image through fitz, to get target dpi image, mainly for higher image
+    import fitz
     if not isinstance(image, Image.Image):
         assert isinstance(image, str)
         _, file_ext = os.path.splitext(image)

@@ -1,4 +1,4 @@
-import fitz
+
 import numpy as np
 import enum
 from pydantic import BaseModel, Field
@@ -27,6 +27,7 @@ def fitz_doc_to_image(doc, target_dpi=200, origin_dpi=None) -> dict:
     Returns:
         dict:  {'img': numpy array, 'width': width, 'height': height }
     """
+    import fitz
     from PIL import Image
     mat = fitz.Matrix(target_dpi / 72, target_dpi / 72)
     pm = doc.get_pixmap(matrix=mat, alpha=False)
@@ -40,6 +41,7 @@ def fitz_doc_to_image(doc, target_dpi=200, origin_dpi=None) -> dict:
 
 
 def load_images_from_pdf(pdf_file, dpi=200, start_page_id=0, end_page_id=None) -> list:
+    import fitz
     images = []
     with fitz.open(pdf_file) as doc:
         pdf_page_num = doc.page_count

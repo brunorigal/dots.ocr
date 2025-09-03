@@ -137,6 +137,40 @@ class DotsOCRParser:
         return prompt
 
     # def post_process_results(self, response, prompt_mode, save_dir, save_name, origin_image, image, min_pixels, max_pixels)
+
+
+    def _parse_image_vllm(self, origin_image, prompt_mode):
+        min_pixels, max_pixels = self.min_pixels, self.max_pixels
+        if prompt_mode == "prompt_grounding_ocr":
+            min_pixels = min_pixels or MIN_PIXELS  # preprocess image to the final input
+            max_pixels = max_pixels or MAX_PIXELS
+        if min_pixels is not None: assert min_pixels >= MIN_PIXELS, f"min_pixels should >= {MIN_PIXELS}"
+        if max_pixels is not None: assert max_pixels <= MAX_PIXELS, f"max_pixels should <+ {MAX_PIXELS}"
+
+
+        image = fetch_image(origin_image, min_pixels=min_pixels, max_pixels=max_pixels)
+        # input_height, input_width = smart_resize(image.height, image.width)
+        prompt = self.get_prompt(prompt_mode, bbox=None, origin_image=origin_image, image=image, min_pixels=min_pixels, max_pixels=max_pixels)
+
+        response = self._inference_with_vllm(image, prompt)
+        result = {
+
+        }
+
+        if prompt_mode in ['prompt_layout_all_en', 'prompt_layout_only_en', 'prompt_grounding_ocr']:
+            cells, filtered = post_process_output(
+                response, 
+                prompt_mode, 
+                origin_image, 
+                image,
+                min_pixels=min_pixels, 
+                max_pixels=max_pixels,
+                )
+
+
+
+        return result, cells, filtered
+
     def _parse_single_image(
         self, 
         origin_image, 

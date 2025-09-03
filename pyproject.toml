@@ -14,8 +14,10 @@ description = ""
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
-    "PyMuPDF",
+    "numpy>=2.2.6",
     "openai",
+    "pillow>=11.3.0",
+    "requests>=2.32.5",
 ]
 [project.optional-dependencies]
 demo = [
@@ -35,6 +37,5 @@ include = ["dots_ocr"]
 
 [project.urls]
 
-[project.scripts]
-
+[tool.uv]
 config-settings = { editable_mode = "compat" }
