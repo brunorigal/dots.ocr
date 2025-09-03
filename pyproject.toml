@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[metadata]
+name = "dots_ocr"
+version = "1.0"
+
+[project]
+name = "dots_ocr"
+version = "1.0"
+authors = []
+description = ""
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "PyMuPDF",
+    "openai",
+]
+[project.optional-dependencies]
+demo = [
+    "gradio",
+    "gradio_image_annotation",
+]
+hf_inference = [
+    "qwen_vl_utils",
+    "transformers==4.51.3",
+    "huggingface_hub",
+    "modelscope",
+    "accelerate",
+]
+
+[tool.setuptools.packages.find]
+include = ["dots_ocr"]  
+
+[project.urls]
+
+[project.scripts]
+
+config-settings = { editable_mode = "compat" }
