@@ -1,0 +1,1 @@
+docker build -t dots-ocr:latest . --file Dockerfile --progress plain

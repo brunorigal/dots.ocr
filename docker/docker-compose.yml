@@ -8,7 +8,7 @@ services:
       - "8000:8000"
     volumes:
       #download model to local，model url：https://www.modelscope.cn/models/rednote-hilab/dots.ocr
-      - ./model/dots.ocr:/workspace/weights/DotsOCR
+      - ${MODEL_FOLDER}:/workspace/weights/DotsOCR
     environment:
       - PYTHONPATH=/workspace/weights:$PYTHONPATH
     deploy:
