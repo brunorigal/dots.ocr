@@ -33,7 +33,7 @@ hf_inference = [
 ]
 
 [tool.setuptools.packages.find]
-include = ["dots_ocr"]  
+include = ["dots_ocr", "dots_ocr.*"]  
 
 [project.urls]
 
