@@ -122,6 +122,6 @@ class DotsOCRParser:
                 max_pixels=max_pixels,
                 )
 
-
-
-        return result, cells, filtered
+            return result, cells, filtered
+        else:
+            return result, response, None
